@@ -7,12 +7,12 @@ type size = int * int
 
 (* threshold thershold image -- image where pixels above the threshold
 value are black *)
-let threshold img (threshold : float) =
+let threshold (img : image) (threshold : float) : image =
   List.map (fun row -> List.map (fun v -> if v <= threshold then 0. else 1.)
                                  row) img ;;
 
 (* show the image *)
-let depict img : unit =
+let depict (img : image) : unit =
   Graphics.open_graph ""; Graphics.clear_graph ();
   let x, y = List.length (List.hd img), List.length img in
   Graphics.resize_window x y;
@@ -24,7 +24,7 @@ let depict img : unit =
   Unix.sleep 2; Graphics.close_graph () ;;
 
 (* dither max image -- dithered image *)
-let dither img =
+let dither (img : image) : image =
   List.map
     (fun row ->
      List.map
@@ -34,11 +34,9 @@ let dither img =
     img ;;
 
 let mona = Monalisa.image ;;
+let mona_threshold = threshold mona 0.75 ;;
+let mona_dither = dither mona ;;
 
-  depict mona ;;
-
-  let mona_threshold = threshold mona 0.75 ;;
-    depict mona_threshold ;;
-
-    let mona_dither = dither mona ;;
-      depict mona_dither ;;
+depict mona ;;
+depict mona_threshold ;;
+depict mona_dither ;;
