@@ -5,12 +5,12 @@ open Graphics ;;
 
 (* threshold thershold image -- image where pixels above the threshold
 value are black *)
-let threshold (img : image) (threshold : float) =
+let threshold img (threshold : float) =
   List.map (fun row -> List.map (fun v -> if v <= threshold then 0. else 1.)
                                  row) img ;;
 
 (* show the image *)
-let depict (img : image) : unit =
+let depict img : unit =
   Graphics.open_graph ""; Graphics.clear_graph ();
   let x, y = List.length (List.hd img), List.length img in
   Graphics.resize_window x y;
@@ -22,7 +22,7 @@ let depict (img : image) : unit =
   Unix.sleep 2; Graphics.close_graph () ;;
 
 (* dither max image -- dithered image *)
-let dither (img : image) : image =
+let dither img =
   List.map
     (fun row ->
      List.map
