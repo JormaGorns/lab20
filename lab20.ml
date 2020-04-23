@@ -1,7 +1,9 @@
-type image = float list list ;;
-(* images are lists of lists of floats between 0. (white) and 1. (black) *)
-type size = int * int ;;
 open Graphics ;;
+open Monalisa ;;
+
+(* images are lists of lists of floats between 0. (white) and 1. (black) *)
+type image = float list list
+type size = int * int
 
 (* threshold thershold image -- image where pixels above the threshold
 value are black *)
